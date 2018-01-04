@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../assets/css/app.css';
 import cardData from '../assets/helpers/card_data';
+import { doubleArray, shuffleArray } from '../assets/helpers';
 
 import Card from './card';
 
@@ -11,7 +12,7 @@ class App extends Component {
 
         this.state = {
             firstCardIndex: null,
-            cards: cardData,
+            cards: [],
             matches: 0,
             attempts: 0,
             gameState: 'ready'
@@ -19,6 +20,12 @@ class App extends Component {
 
         this.flipCard = this.flipCard.bind(this);
         this.blockClick = false;
+    }
+
+    componentDidMount(){
+        this.setState({
+            cards: shuffleArray(doubleArray(cardData))
+        });
     }
 
     handleCardClick(index){
